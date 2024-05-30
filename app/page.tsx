@@ -9,6 +9,7 @@ const MainPage = async () => {
       id: true,
       createdAt: true,
       title: true,
+      isCompleted: true,
     },
     orderBy: {
       createdAt: "desc",

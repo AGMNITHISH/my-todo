@@ -42,3 +42,16 @@ export async function deletetodo(id: string) {
   });
   revalidatePath("/");
 }
+export async function changeTodoState(id: string, isCompleted: boolean) {
+  const changeTodoId = id;
+  const updatedStatus = !isCompleted;
+  await prisma.todo.update({
+    where: {
+      id: changeTodoId,
+    },
+    data: {
+      isCompleted: updatedStatus,
+    },
+  });
+  revalidatePath("/");
+}
