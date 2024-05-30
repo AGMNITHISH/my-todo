@@ -2,7 +2,12 @@
 import { btnInterface } from "@/utils/Interface";
 import React from "react";
 
-const Button = ({ text, actionButton, onClick, type }: btnInterface) => {
+const Button = ({
+  text,
+  actionButton,
+  onClick,
+  type,
+}: btnInterface): JSX.Element => {
   return (
     <button
       type={type}
