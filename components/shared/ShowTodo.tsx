@@ -3,6 +3,7 @@
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
 import EditTodo from "./EditTodo";
+import DeleteTodo from "./DeleteTodo";
 
 export interface todo {
   title: string | null;
@@ -27,7 +28,7 @@ const ShowTodo: React.FC<ShowTodoProps> = ({ todoData }) => {
               <EditTodo todo={todo} />
             </span>
             <span className="px-1 cursor-pointer">
-              <MdDeleteForever />
+              <DeleteTodo todo={todo} />
             </span>
           </div>
         );
