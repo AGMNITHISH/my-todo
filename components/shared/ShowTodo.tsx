@@ -1,34 +1,34 @@
 "use client";
-import { getAllTodos } from "@/app/actions/todoActions";
-import React, { useEffect, useState } from "react";
+
+import React from "react";
+import { MdDeleteForever } from "react-icons/md";
+import EditTodo from "./EditTodo";
 
 export interface todo {
   title: string | null;
   id: string;
   createdAt: Date;
 }
-
+export interface editTodointerface {
+  todo: todo;
+}
 export interface ShowTodoProps {
   todoData: todo[];
 }
 
 const ShowTodo: React.FC<ShowTodoProps> = ({ todoData }) => {
   return (
-    <div className="w-full">
-      <div className="flex gap-5 border items-start w-full m-4 p-2">
-        <div className="w-96">Title</div>
-        <div className="w-96">createdAt</div>
-        <div className="w-96">ID</div>
-      </div>
+    <div className="w-1/2  mx-auto">
       {todoData.map((todo, ind) => {
         return (
-          <div
-            key={ind}
-            className="flex gap-5 border items-start w-full m-4 p-2"
-          >
-            <div className="w-96">{todo.title}</div>
-            <div className="w-96">{todo.createdAt.toString()}</div>
-            <div className="w-96">{todo.id}</div>
+          <div key={ind} className="bg-slate-200 m-4 p-2 rounded-md flex  ">
+            {todo.title} {todo.createdAt.toString()}
+            <span className="px-4 cursor-pointer">
+              <EditTodo todo={todo} />
+            </span>
+            <span className="px-1 cursor-pointer">
+              <MdDeleteForever />
+            </span>
           </div>
         );
       })}

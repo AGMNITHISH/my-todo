@@ -3,27 +3,32 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/utils/prisma";
 
 export async function create(formdata: FormData) {
-  const input = formdata.get("input") as string | null;
-  if (input !== null) {
-    await prisma.todo.create({
-      data: {
-        title: input,
-      },
-    });
-    revalidatePath("/");
-  }
-}
+  const input = formdata.get("input") as string;
 
-export async function getAllTodos() {
-  const data = await prisma.todo.findMany({
-    select: {
-      title: true,
-      createdAt: true,
-      id: true,
-    },
-    orderBy: {
-      createdAt: "desc",
+  if (!input.trim()) {
+    return;
+  }
+
+  await prisma.todo.create({
+    data: {
+      title: input,
     },
   });
-  return data;
+  revalidatePath("/");
+}
+
+export async function edit(formdata: FormData) {
+  const inputId = formdata.get("inputId") as string;
+  const newTitle = formdata.get("newTitle") as string;
+  if (!inputId || !newTitle) return;
+  await prisma.todo.update({
+    where: {
+      id: inputId,
+    },
+    data: {
+      title: newTitle,
+    },
+  });
+
+  revalidatePath("/");
 }
